@@ -1,0 +1,9 @@
+#1/bin/bash
+
+if(($# != 1))
+then
+	echo "Requires a filename to open"
+	exit 1
+fi
+
+open -a "/Applications/Google Chrome.app" $1

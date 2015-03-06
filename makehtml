@@ -1,0 +1,12 @@
+#!/bin/bash
+
+FILE=$1
+touch $FILE
+echo "<!doctype html>" > $FILE
+echo "<HTML>" >> $FILE
+echo "<HEAD>" >> $FILE
+echo "<!--NEXT-->" >> $FILE
+echo "</HEAD>" >> $FILE
+echo "<BODY>" >> $FILE
+echo "</BODY>" >> $FILE
+echo "</HTML>" >> $FILE
