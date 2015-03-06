@@ -9,7 +9,7 @@ fi
 
 COMMANDNAME=$1
 
- pushd /usr/local/bin
+ pushd /usr/local/bin/scripts
  touch $COMMANDNAME 
  echo '#!/bin/bash' > $COMMANDNAME
  chmod 755 $COMMANDNAME
