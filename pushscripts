@@ -1,0 +1,8 @@
+#!/bin/bash
+
+pushd /usr/local/bin/scripts
+git add .
+git commit -m "automatic push"
+git push
+popd
+
