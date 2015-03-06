@@ -1,0 +1,6 @@
+#!/bin/bash
+
+open -a Finder /usr/local/bin
+
+
+ 
