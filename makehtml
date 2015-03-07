@@ -5,8 +5,107 @@ touch $FILE
 echo "<!doctype html>" > $FILE
 echo "<HTML>" >> $FILE
 echo "<HEAD>" >> $FILE
-echo "<!--NEXT-->" >> $FILE
+
+function addCSS() {
+	str=$1;
+	echo "<LINK rel=\"stylesheet\" href=\"$str\">" >> $FILE
+};
+function addJS() {
+	echo "ADDING JS"
+	str=$1;
+	echo "<SCRIPT src=\"$str\"></SCRIPT>" >> $FILE
+};
+
+lowerString=1
+
+function toLower()
+{
+   local __word=$1
+   local __len=${#__word}
+   local __char
+   local __octal
+   local __decimal
+   local __result
+
+   for (( i=0; i<__len; i++ ))
+   do
+      __char=${__word:$i:1}
+      case "$__char" in
+         [A-Z] )
+            printf -v __decimal '%d' "'$__char"
+            printf -v __octal '%03o' $(( $__decimal ^ 0x20 ))
+            printf -v __char \\$__octal
+            ;;
+      esac
+      __result+="$__char"
+   done
+   
+   lowerString="$__result"
+};
+
+for thing in $@; do
+	echo $thing
+	if [ $FILE = $thing ]; then
+		echo "inside if"
+		continue;
+	fi
+
+	toLower $thing
+	echo $lowerString
+	
+	#if [ "$string" != "${string/foo/}" ]; then
+    	#echo "It's there!"
+	#fi
+	
+	if [[ $lowerString == *".css"* ]]; then
+		echo "add css"
+		addCSS $lowerString
+		continue
+	fi
+	if [[ $lowerString == *".js"* ]]; then
+		echo "add js"
+		addJS $lowerString
+		continue
+	fi
+	if [[ $lowerString == *"bootstrap"* ]]; then
+		addCSS "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css"
+		continue
+	fi
+	if [[ $lowerString == *"jquery"* ]]; then
+		addJS "https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"
+		continue
+	fi
+	if [[ $lowerString == *"angular"* ]]; then
+		addJS "https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"
+		continue
+	fi
+	if [[ $lowerString == *"dojo"* ]]; then
+		addJS "https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"
+		continue
+	fi
+	if [[ $lowerString == *"three"* ]]; then
+		addJS "https://ajax.googleapis.com/ajax/libs/threejs/r69/three.min.js"
+		continue
+	fi
+
+	if [[ $lowerString == *"webfont"* ]]; then
+		addJS "https://ajax.googleapis.com/ajax/libs/webfont/1.5.10/webfont.js"
+		continue
+	fi
+	if [[ $lowerString == *"backbone"* ]]; then
+		addJS "https://cdnjs.cloudflare.com/ajax/libs/backbone.js/1.1.2/backbone-min.js"
+		continue
+	fi
+	if [[ $lowerString == *"underscore"* ]]; then
+		addJS "https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.2/underscore-min.js"
+		continue
+	fi
+	
+done
+
 echo "</HEAD>" >> $FILE
 echo "<BODY>" >> $FILE
+echo "<p>this is your webpage!<p>" >> $FILE
 echo "</BODY>" >> $FILE
 echo "</HTML>" >> $FILE
+
