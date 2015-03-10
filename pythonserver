@@ -1,0 +1,8 @@
+#!/bin/bash
+
+if [ "$#" -ne 1 ]
+then
+	python -m SimpleHTTPServer
+else
+	python -m SimpleHTTPServer $1
+fi
