@@ -2,9 +2,10 @@
 
 FILE=$1
 touch $FILE
-echo "<!doctype html>" > $FILE
-echo "<HTML>" >> $FILE
+echo "<!DOCTYPE html>" > $FILE
+echo "<HTML lang="en">" >> $FILE
 echo "<HEAD>" >> $FILE
+echo "<meta charset="UTF-8">" >> $FILE
 
 function addCSS() {
 	str=$1;
