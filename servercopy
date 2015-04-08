@@ -1,0 +1,17 @@
+#!/bin/bash
+
+FILENAME=index.html
+FOLDERNAME=html/blog
+
+if [ $# -gt 0 ]
+  then
+    $FILENAME=$1
+fi
+
+if [ $# -gt 1 ]
+  then
+    $FOLDERNAME=html/$2
+fi
+
+scp $FILENAME cbuckingham14@heavyhandedgames.com:$FOLDERNAME
+

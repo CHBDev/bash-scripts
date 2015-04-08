@@ -1,0 +1,73 @@
+#!/bin/bash
+
+FILE=index.html
+
+if [ $# -gt 0 ]
+  then
+    $FILE=$1
+fi
+
+touch $FILE
+echo "<!DOCTYPE html>" > $FILE
+echo "<HTML>" >> $FILE
+echo "<head>" >> $FILE
+echo "<link rel=\"stylesheet\" href=\"../HHgEngine/HHgMain.css\">" >> $FILE
+echo "</head>" >> $FILE
+echo "<body ondragstart=\"return false;\" ondrop=\"return false;\" onselectstart=\"return false;\">" >> $FILE
+  echo "<div id=\"all\">" >> $FILE
+
+  echo "</div>" >> $FILE
+  echo "<script src=\"HHgConfig.js\"></script>" >> $FILE
+  echo "<script src=\"../HHgEngine/HHgLoadingScreen.js\"></script>" >> $FILE
+  echo "<script src=\"../HHgEngine/HHgFirst.js\"></script>" >> $FILE
+  echo "<script src=\"../HHgEngine/HHgPath.js\"></script>" >> $FILE
+  echo "<script src=\"../HHgEngine/HHgMouse.js\"></script>" >> $FILE
+  echo "<script src=\"../HHgEngine/HHgHelper.js\"></script>" >> $FILE
+  echo "<script src=\"../HHgEngine/HHgColors.js\"></script>" >> $FILE
+  echo "<script src=\"../HHgEngine/HHgVector2.js\"></script>" >> $FILE
+  echo "<script src=\"../HHgEngine/HHgScene.js\"></script>" >> $FILE
+  echo "<script src=\"../HHgEngine/HHgHolder.js\"></script>" >> $FILE
+  echo "<script src=\"../HHgEngine/HHgObjectPool.js\"></script>" >> $FILE
+  echo "<script src=\"../HHgEngine/HHgText.js\"></script>" >> $FILE
+  echo "<script src=\"../HHgEngine/HHgSprite.js\"></script>" >> $FILE
+  echo "<script src=\"../HHgEngine/HHgFileManager.js\"></script>" >> $FILE
+  echo "<script src=\"../HHgEngine/HHgActionManager.js\"></script>" >> $FILE
+  echo "<script src=\"../HHgEngine/HHgAction.js\"></script>" >> $FILE
+  echo "<script src=\"../HHgEngine/HHgGame.js\"></script>" >> $FILE
+
+  echo "<script src=\"../HHgEngine/HHgLast.js\"></script>" >> $FILE
+echo "</body>" >> $FILE
+echo "</HTML>" >> $FILE
+
+JS=HHgConfig.js
+
+touch $JS
+
+echo "var HardwareScreen = {" > $JS
+echo "  w : window.innerWidth," >> $JS
+echo "  h : window.innerHeight," >> $JS
+echo "  //w : window.screen.availWidth," >> $JS
+echo "  //h : window.screen.availHeight," >> $JS
+echo "};" >> $JS
+echo "" >> $JS
+echo "var HHgScreen = {" >> $JS
+echo "  w : 1920, //these are the points used for all measurements" >> $JS
+echo "  h : 1080, //do not adjust these to an arbitray" >> $JS
+echo "  maxh : 1440," >> $JS
+echo "  isLandscapeGame : true, //not implemented yet, the w/h is the only determining factor" >> $JS
+echo "};" >> $JS
+echo "" >> $JS
+echo "var HHgTestBoxes = false;" >> $JS
+echo "" >> $JS
+echo "var HHgCustomOverride = false; //change this to true and game will begin in start function below" >> $JS
+echo "var HHgGame = {doStart: function(){" >> $JS
+echo "  //if HHgCustomOverride == true, then this function will start all custom game code" >> $JS
+echo "  //if false, then the doStart() function located in HHgGame.js will run the demo code selected" >> $JS
+echo "    var theOne = HHgGetHolder({w:600,h:200});" >> $JS
+echo "      theOne.doMoveToNewParent({parent: HHgGameHolder,position: new HHgVector2(0,0), isScreenPos: true});" >> $JS
+echo "      theOne.setMouseable(true);" >> $JS
+echo "      theOne.setIsDraggable(true);" >> $JS
+echo "      theOne.doAddParagraphText({text: \"HELLO USER!\nCustom Override is on\", color: \"#cccccc\", vAlign: \"center\", hAlign: \"center\", fontSize: \"50\", shadow: {x: 2, y: 2, color: \"#000000\", blur: 0}});" >> $JS
+echo " " >> $JS
+echo "   console.log(\"HELLO USER! Custom override is on\");" >> $JS
+echo " }};" >> $JS
