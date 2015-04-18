@@ -13,5 +13,5 @@ if [ $# -gt 1 ]
     $FOLDERNAME=html/$2
 fi
 
-scp $FILENAME cbuckingham14@heavyhandedgames.com:$FOLDERNAME
+scp $FILENAME somebody@heavyhandedgames.com:$FOLDERNAME
 
