@@ -2,15 +2,15 @@
 
 if(("$#" != 1))
 then
-	echo "Requires Command Name as Argument"
-	exit 1
+  echo "Requires Command Name as Argument"
+  exit 1
 fi
 
 
 COMMANDNAME=$1
 
  pushd /usr/local/bin/scripts
- touch $COMMANDNAME 
+ touch $COMMANDNAME
  echo '#!/bin/bash' > $COMMANDNAME
  chmod 755 $COMMANDNAME
  subl $COMMANDNAME
