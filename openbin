@@ -4,7 +4,6 @@ if [ "$#" -ne 1 ]
 then
   open -a Finder /usr/local/bin
 else
-
 fi
 
 
