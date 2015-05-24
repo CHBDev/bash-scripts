@@ -1,0 +1,42 @@
+#!/bin/bash
+
+if(("$#" != 1))
+then
+  echo "USAGE requires repo_name"
+  exit 1
+fi
+
+#NOTE to customize this, will need to add USERNAME=$2 change check above
+REPONAME="${1}.git"
+
+#clone bare repo into temp directory
+git clone --bare "https://github.com/CHBDev/$REPONAME"
+
+#move to temp directory
+cd $REPONAME
+
+#middle section
+git filter-branch --env-filter '
+
+OLD_EMAIL="cooper.buckingham@gmail.com"
+CORRECT_NAME="CH Buckingham"
+CORRECT_EMAIL="cooper.buckingham.dev@gmail.com"
+
+if [ "$GIT_COMMITTER_EMAIL" = "$OLD_EMAIL" ]
+then
+    export GIT_COMMITTER_NAME="$CORRECT_NAME"
+    export GIT_COMMITTER_EMAIL="$CORRECT_EMAIL"
+fi
+if [ "$GIT_AUTHOR_EMAIL" = "$OLD_EMAIL" ]
+then
+    export GIT_AUTHOR_NAME="$CORRECT_NAME"
+    export GIT_AUTHOR_EMAIL="$CORRECT_EMAIL"
+fi
+' --tag-name-filter cat -- --branches --tags
+
+#final section
+git push --force --tags origin 'refs/heads/*'
+
+#pop back and delete temp folder
+cd ..
+rm -rf $REPONAME
