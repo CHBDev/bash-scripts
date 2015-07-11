@@ -1,3 +1,4 @@
 #!/bin/bash
+#has to run in a . term env so ". HR"
 cd
 cd ./Desktop/HackReactorGitHub/
